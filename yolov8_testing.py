@@ -2,13 +2,12 @@ import cv2
 import requests
 import numpy as np
 from ultralytics import YOLO
-from deepface import DeepFace
 
 # Load YOLOv8 model
 model = YOLO("yolov8n.pt")  # Using pre-trained YOLOv8 Nano model
 
 # Image URL
-image_url = "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/463655996_10212356956396770_2311431122917953721_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hLySzAQ5MeQQ7kNvgHWing3&_nc_oc=AdieDXHZIgnBPMFSpcCbfveBOZEyldbLvWVoO-1QCQZO00nEainUeTKzgzkgIL3UvzxnAddhK0VCn99BZebFRohp&_nc_zt=23&_nc_ht=scontent-ord5-2.xx&_nc_gid=ABlDW0tZ_eG1n9AjXLC9vCN&oh=00_AYE21ECJyNWr3qRBGltVyyjhxZK2yLVNmV7LfbXlFyYYyw&oe=67D2299C"
+image_url = "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/461325477_10225612205002842_7091785603339753515_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=foCyihytD_sQ7kNvgGzqv-9&_nc_oc=AdjxLcpahE2wv3EGrKwoXyxHG_QpGeAvVUOvlgfADOg13wiv4uJE6FLT2yHG7YBt5aeafTYjz17XUp385IYBs0wK&_nc_zt=23&_nc_ht=scontent-ord5-2.xx&_nc_gid=AL3JiMwT6EHpTkx4DLmagk_&oh=00_AYFwC3qQ70HOpr2gne-lvUJqO4uPypCDlyr-7du91VsFBQ&oe=67D2420A"
 
 # Download the image
 response = requests.get(image_url, stream=True)
