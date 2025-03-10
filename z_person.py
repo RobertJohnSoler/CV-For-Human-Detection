@@ -15,7 +15,7 @@ class person:
         self.estimated_age = analysis["age"]
         detected_races = {}
         for r, c in analysis["race"].items():
-            if c > 0.2:                 # only include confidence levels over 20% for races
+            if c > 20:                 # only include confidence levels over 20% for races
                 detected_races[r] = float(c)
         self.race_info = {
             "dominant_race": analysis["dominant_race"],
