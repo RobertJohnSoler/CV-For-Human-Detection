@@ -6,17 +6,17 @@ class person:
     race_info: dict    
     
     def __init__(self, analysis):
-        self.detection_confidence = analysis["face_confidence"]
+        self.detection_confidence = float(analysis["face_confidence"])
         detected_gender = analysis["dominant_gender"]
         self.gender_info = {
             "gender": detected_gender,
-            "confidence": analysis["gender"][detected_gender]
+            "confidence": float(analysis["gender"][detected_gender])
         }
         self.estimated_age = analysis["age"]
         detected_races = {}
         for r, c in analysis["race"].items():
             if c > 0.2:                 # only include confidence levels over 20% for races
-                detected_races[r] = c
+                detected_races[r] = float(c)
         self.race_info = {
             "dominant_race": analysis["dominant_race"],
             "race_confidences": detected_races
