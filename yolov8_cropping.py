@@ -2,6 +2,8 @@ import cv2
 import requests
 import numpy as np
 from ultralytics import YOLO
+import os
+import shutil
 
 # Load YOLOv8 model
 model = YOLO("yolov8n.pt")  # Using pre-trained YOLOv8 Nano model
@@ -12,7 +14,12 @@ image_url = "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/461325477_102256
 
 # Download the image
 response = requests.get(image_url, stream=True)
+
 if response.status_code == 200:
+    
+    shutil.rmtree("detected_people")
+    os.mkdir("detected_people")
+    
     # Convert image bytes to NumPy array
     img_array = np.asarray(bytearray(response.content), dtype=np.uint8)
     img = cv2.imdecode(img_array, cv2.IMREAD_COLOR)
@@ -23,7 +30,7 @@ if response.status_code == 200:
     print(f"Image saved as {image_path}")
 
     # Run YOLOv8 detection
-    results = model(image_path)
+    results = model.predict(image_path)
 
     # Get detected class indexes
     # print("boxes are", results[0].boxes)
@@ -41,7 +48,7 @@ if response.status_code == 200:
         if detected_object == "person":
             print("person detected!")
             person_img = img[y_min:y_max, x_min:x_max]
-            cv2.imwrite(f"cropped_{i}.jpg", person_img)
+            cv2.imwrite(f"detected_people/cropped_{i}.jpg", person_img)
 
     # for i, box in enumerate(results[0].boxes):
     #     detected_coords = box.xyxy
