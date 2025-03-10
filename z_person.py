@@ -26,6 +26,7 @@ class person:
         
     def getPersonInfo(self):
         personInfo = {
+            "file": self.filename,
             "detection_confidence": self.detection_confidence,
             "gender_info": self.gender_info,
             "estimated_age": self.estimated_age,
