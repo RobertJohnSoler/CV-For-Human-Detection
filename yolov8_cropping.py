@@ -26,18 +26,22 @@ if response.status_code == 200:
     results = model(image_path)
 
     # Get detected class indexes
-    print("boxes are", results[0].boxes)
-    print("cls is", results[0].boxes.cls)
-    print("confidence is", results[0].boxes.conf)
+    # print("boxes are", results[0].boxes)
+    # print("cls is", results[0].boxes.cls)
+    # print("confidence is", results[0].boxes.conf)
     
     for i, box in enumerate(results[0].boxes):
         detected_coords = box.xyxy
-        x_min = float(detected_coords[0][0])
-        y_min = float(detected_coords[0][1])
-        x_max = float(detected_coords[0][2])
-        y_max = float(detected_coords[0][3])
+        x_min = int(detected_coords[0][0])
+        y_min = int(detected_coords[0][1])
+        x_max = int(detected_coords[0][2])
+        y_max = int(detected_coords[0][3])
         detected_object = objects[int(box.cls)]
-        print(detected_object, (x_min, y_min, x_max, y_max))
+        # print(detected_object, (x_min, y_min, x_max, y_max))
+        if detected_object == "person":
+            print("person detected!")
+            person_img = img[y_min:y_max, x_min:x_max]
+            cv2.imwrite(f"cropped_{i}.jpg", person_img)
 
     # for i, box in enumerate(results[0].boxes):
     #     detected_coords = box.xyxy
