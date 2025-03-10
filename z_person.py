@@ -1,11 +1,13 @@
 class person:
     
+    filename: str
     detection_confidence: float
     gender_info: dict
     estimated_age: int
     race_info: dict    
     
-    def __init__(self, analysis):
+    def __init__(self, filename, analysis):
+        self.filename = filename
         self.detection_confidence = float(analysis["face_confidence"])
         detected_gender = analysis["dominant_gender"]
         self.gender_info = {

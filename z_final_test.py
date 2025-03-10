@@ -47,7 +47,7 @@ def analyze_img(image_url: str):
                 filename = f"detected_people/cropped_{i}.jpg"
                 cv2.imwrite(filename, person_img)
                 analysis = DeepFace.analyze(img_path=filename, actions=['gender', 'age', 'race'], enforce_detection=True)[0]
-                detected_person = person(analysis)
+                detected_person = person(img, analysis)
                 detected_people.append(detected_person)
                 
     else:
